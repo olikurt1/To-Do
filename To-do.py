@@ -13,7 +13,8 @@ while(loop):
             "2. Remove Task\n"
             "3. Show Tasks\n"
             "4. Edit task\n"
-            "5. Quit\n"
+            "5. Clear list\n"
+            "6. Quit\n"
             "==============\n"
             ">"
         ))
@@ -27,6 +28,7 @@ while(loop):
             "title": task,
             "status": "Incomplete"
         })
+
     elif user_choice == 2:
         task_position = int(input("Task position (number): "))
         tasks.remove(tasks[task_position-1])
@@ -45,11 +47,19 @@ while(loop):
         elif edit_type == 2:
             status = int(input("Set task status (1)incomplete, (2)complete, (3)in progress"))
             tasks[task_to_edit -1]["status"] = "incomplete" if status == 1 else "complete" if status == 2 else "in progress"
+
     elif user_choice == 5:
+        print("Clearing list.")
+        for i in range(0, len(tasks)):
+            tasks.remove(tasks[0])
+            
+
+    elif user_choice == 6:
         with open("tasks.json", "w") as file:
             json.dump(tasks, file)
         print("Goodbye")
         loop = False        
+
     else:
         print("Choice out of bounds")
 
