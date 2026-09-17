@@ -7,15 +7,19 @@ print(tasks)
 loop = True
 
 while(loop):
-    user_choice = int(input( 
-        "==============\n" 
-        "1. Add Task\n"
-        "2. Remove Task\n"
-        "3. Show Tasks\n"
-        "4. Quit\n"
-        "==============\n"
-        ">"
-    ))
+    try:
+        user_choice = int(input( 
+            "==============\n" 
+            "1. Add Task\n"
+            "2. Remove Task\n"
+            "3. Show Tasks\n"
+            "4. Quit\n"
+            "==============\n"
+            ">"
+        ))
+    except:
+        print("Please enter a number from 1 to 4.")
+        continue
 
     if user_choice == 1:
         task = input("Enter task: ")
