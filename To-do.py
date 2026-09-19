@@ -1,3 +1,4 @@
+import time
 import json
 print("=========To-Do List=========")
 with open("tasks.json", "r") as file:
@@ -34,10 +35,17 @@ while(loop):
         tasks.remove(tasks[task_position-1])
   
     elif user_choice == 3:
-        print("=====================================")
-        for task in tasks:
-            print(task["title"]," - ",task["status"])
-        print("=====================================")
+        if len(tasks) < 1:
+            print("=============")
+            print("List is Empty")
+            print("=============")
+        else:
+            print("=====================================")
+            for task in tasks:
+                print(task["title"]," - ",task["status"])
+            print("=====================================")
+            print(" ")
+            time.sleep(1)
 
     elif user_choice == 4:
         task_to_edit = int(input("Which task would you like to edit (number): "))
@@ -45,7 +53,7 @@ while(loop):
         if edit_type == 1:
             tasks[task_to_edit - 1]["title"] = input("Enter Task replacement: ")
         elif edit_type == 2:
-            status = int(input("Set task status (1)incomplete, (2)complete, (3)in progress"))
+            status = int(input("Set task status (1)incomplete, (2)complete, (3)in progress: "))
             tasks[task_to_edit -1]["status"] = "incomplete" if status == 1 else "complete" if status == 2 else "in progress"
 
     elif user_choice == 5:
@@ -53,7 +61,6 @@ while(loop):
         for i in range(0, len(tasks)):
             tasks.remove(tasks[0])
             
-
     elif user_choice == 6:
         with open("tasks.json", "w") as file:
             json.dump(tasks, file)
